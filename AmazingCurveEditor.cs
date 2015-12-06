@@ -73,16 +73,19 @@ namespace AmazingCurveEditor
         {
             winPos = new Rect(Screen.width / 2, Screen.height / 2, 512, 400);
             graph = new Texture2D(texWidth, texHeight, TextureFormat.RGB24, false, true);
-            points.Add(new FloatString4(0, 0, 0, 0.02f));
-            points.Add(new FloatString4(100, 1, 0.02f, 0));
+            points.Add(new FloatString4(0, 0, 0, 0));
+            points.Add(new FloatString4(1, 1, 0, 0));
             UpdateCurve();
+
+			skin = AssetBase.GetGUISkin ("KSP window 2");
         }
 
+		private GUISkin skin;
         private void OnGUI()
         {
             if (graph != null && showUI)
             {
-                GUI.skin = AssetBase.GetGUISkin("KSP window 2");
+				GUI.skin = skin;
                 winPos = GUILayout.Window(9384, winPos, WindowGUI, "Amazing Curve Editor");
             }
         }
@@ -217,7 +220,7 @@ namespace AmazingCurveEditor
 
         private void UpdateCurve()
         {
-            points.Sort();
+            //points.Sort();
 
             curve = new FloatCurve();
 
